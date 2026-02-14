@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Happy Valentine's Day My Love 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --rose:#ff2d55;--rose-light:#ff6b8a;--rose-dark:#c9003c;
+    --gold:#f4c842;--cream:#fff9f0;--deep:#1a0010;
+    --pink:#ffb3c6;--blush:#fce4ec;
+  }
+  body{font-family:'Quicksand',sans-serif;background:var(--deep);overflow:hidden;height:100vh;width:100vw}
+  .page{position:absolute;top:0;left:0;width:100%;height:100%;display:none;overflow:hidden}
+  .page.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .page-btn{position:absolute;bottom:30px;right:40px;background:var(--rose);color:white;border:none;padding:14px 32px;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(255,45,85,0.5);transition:all .3s;z-index:100}
+  .page-btn:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 30px rgba(255,45,85,0.7)}
+  .page-btn.locked{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);cursor:not-allowed;box-shadow:none;pointer-events:none}
+  .page-btn.locked::after{content:' 🔒';font-size:1rem}
+  .page-indicator{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+  .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);transition:all .4s}
+  .dot.active{background:var(--rose);transform:scale(1.4)}
+
+  /* ========= PAGE 1 - WELCOME ========= */
+  #p1{background:radial-gradient(ellipse at 30% 50%, #3d0020 0%, #1a0010 60%, #0d000a 100%)}
+  .p1-hearts{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+  .float-heart{position:absolute;font-size:1.5rem;animation:floatUp 6s ease-in infinite;opacity:0}
+  @keyframes floatUp{0%{opacity:0;transform:translateY(110vh) scale(0.5)}20%{opacity:.7}80%{opacity:.4}100%{opacity:0;transform:translateY(-10vh) scale(1.2) rotate(20deg)}}
+  .p1-title{font-family:'Dancing Script',cursive;font-size:clamp(3rem,8vw,7rem);color:white;text-align:center;line-height:1.1;animation:fadeSlideDown 1.2s ease both;text-shadow:0 0 40px rgba(255,45,85,0.8),0 4px 20px rgba(0,0,0,0.5)}
+  .p1-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.6rem);color:var(--pink);margin-top:20px;animation:fadeSlideDown 1.2s .3s ease both;letter-spacing:2px}
+  .big-heart-btn{margin-top:40px;animation:fadeSlideDown 1.2s .6s ease both,heartbeat 1.5s 2s infinite}
+  @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .big-heart-btn span{font-size:5rem;cursor:pointer;display:block;filter:drop-shadow(0 0 20px rgba(255,45,85,0.9))}
+  .p1-hint{font-size:0.9rem;color:rgba(255,255,255,0.4);margin-top:15px;animation:fadeSlideDown 1.2s .9s ease both;letter-spacing:3px;text-transform:uppercase}
+  @keyframes fadeSlideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+
+
+
+  /* ========= PAGE 3 - REASONS I LOVE YOU ========= */
+  #p3{background:linear-gradient(160deg,#0d000a 0%,#2d0a1a 50%,#1a0010 100%)}
+  .p3-title{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,4.5rem);color:white;text-align:center;margin-bottom:25px;text-shadow:0 0 30px rgba(255,45,85,0.6)}
+  .reasons-container{max-width:650px;width:90%;display:flex;flex-direction:column;gap:12px;max-height:70vh;overflow-y:auto;padding-right:5px}
+  .reasons-container::-webkit-scrollbar{width:3px}
+  .reasons-container::-webkit-scrollbar-thumb{background:var(--rose);border-radius:10px}
+  .reason-card{background:rgba(255,255,255,0.07);border-radius:15px;padding:14px 20px;display:flex;align-items:center;gap:14px;border-left:3px solid var(--rose);transition:all .3s;animation:slideInLeft .5s ease both}
+  .reason-card:hover{background:rgba(255,45,85,0.15);transform:translateX(8px)}
+  .reason-num{font-family:'Dancing Script',cursive;font-size:2rem;color:var(--rose-light);min-width:35px;text-align:center}
+  .reason-text{font-size:clamp(0.85rem,2vw,1rem);color:rgba(255,255,255,0.9);line-height:1.4}
+  @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+
+  /* ========= PAGE 3 - QUIZ ========= */
+  #p3{background:linear-gradient(135deg,#0a0015 0%,#1a0030 50%,#0d000a 100%)}
+  .quiz-box{background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border-radius:25px;padding:35px;max-width:600px;width:90%;border:1px solid rgba(255,45,85,0.3);box-shadow:0 0 50px rgba(255,45,85,0.1)}
+  .quiz-title{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,3.5rem);color:white;text-align:center;margin-bottom:5px}
+  .quiz-sub{text-align:center;color:var(--pink);font-size:0.9rem;margin-bottom:25px;font-style:italic}
+  .quiz-question{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.3rem);color:white;margin-bottom:20px;line-height:1.5;min-height:60px}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .quiz-opt{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 15px;color:white;cursor:pointer;font-family:'Quicksand',sans-serif;font-size:0.95rem;transition:all .3s;text-align:center}
+  .quiz-opt:hover{border-color:var(--rose);background:rgba(255,45,85,0.2)}
+  .quiz-opt.correct{background:rgba(50,200,100,0.3);border-color:#32c864}
+  .quiz-opt.wrong{background:rgba(255,60,60,0.3);border-color:#ff3c3c}
+  .quiz-score{font-family:'Dancing Script',cursive;font-size:2rem;color:var(--gold);text-align:center}
+  .quiz-progress{font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:10px}
+
+  /* ========= PAGE 4 - BALLOON POP PRANK ========= */
+  #p4{background:radial-gradient(ellipse at center, #1a0030 0%, #0a0010 100%)}
+  .prank-title{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,4rem);color:white;text-align:center;margin-bottom:5px;text-shadow:0 0 30px rgba(255,45,85,0.8)}
+  .prank-sub{color:var(--pink);font-style:italic;margin-bottom:20px;font-size:0.95rem;text-align:center}
+  .balloon-area{width:100%;height:65vh;position:relative;overflow:hidden}
+  .balloon{position:absolute;cursor:pointer;transition:transform .2s;animation:floatBalloon 4s ease-in-out infinite;transform-origin:bottom center;user-select:none}
+  .balloon:hover{transform:scale(1.1)}
+  .balloon-body{width:70px;height:85px;border-radius:50% 50% 45% 45%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;position:relative;filter:drop-shadow(0 5px 15px rgba(0,0,0,0.4))}
+  .balloon-body::after{content:'';position:absolute;top:20%;left:25%;width:15px;height:20px;background:rgba(255,255,255,0.3);border-radius:50%;transform:rotate(-30deg)}
+  .balloon-string{width:2px;height:50px;background:rgba(255,255,255,0.4);margin:0 auto;position:relative}
+  .balloon-string::after{content:'';position:absolute;bottom:0;left:-8px;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-radius:50%}
+  @keyframes floatBalloon{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-20px) rotate(3deg)}}
+  .balloon.popped{animation:pop .3s ease forwards;pointer-events:none}
+  @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.3)}60%{transform:scale(0.1)}100%{transform:scale(0);opacity:0}}
+  .confetti-piece{position:absolute;width:8px;height:8px;pointer-events:none;animation:confettiFall 1.5s ease forwards}
+  @keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(150px) rotate(720deg) translateX(var(--cx))}}
+  .pop-counter{position:absolute;top:10px;right:20px;font-family:'Dancing Script',cursive;font-size:1.5rem;color:white;background:rgba(255,45,85,0.3);padding:8px 20px;border-radius:30px;backdrop-filter:blur(5px)}
+  .prank-reveal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:rgba(0,0,0,0.9);border-radius:25px;padding:40px;text-align:center;z-index:200;transition:transform .5s cubic-bezier(0.34,1.56,0.64,1);border:3px solid var(--rose);backdrop-filter:blur(20px);min-width:300px}
+  .prank-reveal.show{transform:translate(-50%,-50%) scale(1)}
+  .prank-reveal h2{font-family:'Dancing Script',cursive;font-size:2.5rem;color:var(--rose);margin-bottom:10px}
+  .prank-reveal p{color:rgba(255,255,255,0.8);margin-bottom:20px;font-size:0.95rem}
+  .prank-close{background:var(--rose);color:white;border:none;padding:10px 25px;border-radius:20px;cursor:pointer;font-family:'Dancing Script',cursive;font-size:1.2rem}
+
+  /* ========= PAGE 5 - LOVE METER ========= */
+  #p5{background:linear-gradient(160deg,#00101a 0%,#001a2d 50%,#0a000d 100%)}
+  .meter-title{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,4.5rem);color:white;text-align:center;margin-bottom:10px;text-shadow:0 0 30px rgba(255,45,85,0.6)}
+  .meter-box{max-width:500px;width:90%;background:rgba(255,255,255,0.06);border-radius:25px;padding:35px;border:1px solid rgba(255,45,85,0.2)}
+  .meter-inputs{display:flex;flex-direction:column;gap:15px;margin-bottom:25px}
+  .meter-input{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px 18px;color:white;font-family:'Quicksand',sans-serif;font-size:1rem;width:100%;transition:border-color .3s;outline:none}
+  .meter-input:focus{border-color:var(--rose)}
+  .meter-input::placeholder{color:rgba(255,255,255,0.3)}
+  .meter-calc-btn{background:var(--rose);color:white;border:none;padding:15px;border-radius:12px;font-family:'Dancing Script',cursive;font-size:1.5rem;cursor:pointer;width:100%;transition:all .3s;box-shadow:0 4px 20px rgba(255,45,85,0.4)}
+  .meter-calc-btn:hover{transform:scale(1.03);box-shadow:0 6px 30px rgba(255,45,85,0.6)}
+  .meter-result{text-align:center;display:none}
+  .meter-percent{font-family:'Dancing Script',cursive;font-size:5rem;color:var(--rose);line-height:1}
+  .meter-bar-wrap{background:rgba(255,255,255,0.1);border-radius:20px;height:20px;margin:15px 0;overflow:hidden}
+  .meter-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--rose-dark),var(--rose),var(--rose-light));transition:width 2s cubic-bezier(0.34,1.56,0.64,1);width:0}
+  .meter-msg{font-family:'Playfair Display',serif;font-style:italic;color:var(--pink);font-size:1.1rem;margin-top:10px}
+
+  /* ========= PAGE 6 - PROMISE ========= */
+  #p6{background:linear-gradient(135deg,#0d0010 0%,#1a0020 40%,#0d0010 100%)}
+  .promise-title{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,6vw,5rem);color:white;text-align:center;margin-bottom:25px;text-shadow:0 0 30px rgba(255,45,85,0.7)}
+  .promises-list{max-width:600px;width:90%;display:flex;flex-direction:column;gap:15px}
+  .promise-item{display:flex;align-items:flex-start;gap:15px;background:rgba(255,255,255,0.06);border-radius:18px;padding:18px 22px;border:1px solid rgba(255,45,85,0.2);transition:all .4s;cursor:pointer;animation:fadeInUp .6s ease both}
+  .promise-item:hover{background:rgba(255,45,85,0.15);border-color:var(--rose);transform:translateY(-3px)}
+  .promise-item.checked .promise-check{transform:scale(1.3);filter:brightness(1.5)}
+  .promise-check{font-size:1.8rem;transition:all .3s;min-width:35px}
+  .promise-text{font-size:clamp(0.9rem,2vw,1.05rem);color:rgba(255,255,255,0.9);line-height:1.5}
+  .promise-sign{font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--rose-light);text-align:center;margin-top:20px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ========= PAGE 7 - YES/NO PRANK ========= */
+  #p7{background:radial-gradient(ellipse at center,#1a000d 0%,#0d0008 100%)}
+  .yn-question{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,4rem);color:white;text-align:center;margin-bottom:15px;line-height:1.2;padding:0 20px;text-shadow:0 0 30px rgba(255,45,85,0.7)}
+  .yn-heart-big{font-size:6rem;text-align:center;animation:heartbeat 1s infinite;margin-bottom:20px;display:block}
+  .yn-sub{color:var(--pink);font-style:italic;text-align:center;margin-bottom:35px;font-size:1rem}
+  .yn-btns{display:flex;gap:20px;justify-content:center;align-items:center;flex-wrap:wrap}
+  .yn-yes{background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:white;border:none;padding:18px 50px;border-radius:50px;font-family:'Dancing Script',cursive;font-size:2rem;cursor:pointer;box-shadow:0 6px 30px rgba(255,45,85,0.5);transition:all .3s;z-index:10}
+  .yn-yes:hover{transform:scale(1.1) translateY(-3px);box-shadow:0 10px 40px rgba(255,45,85,0.8)}
+  .yn-no{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:2px solid rgba(255,255,255,0.2);padding:15px 35px;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.5rem;cursor:pointer;transition:all .3s;position:absolute}
+  .yn-success{display:none;text-align:center;animation:bounceIn .6s ease}
+  @keyframes bounceIn{0%{transform:scale(0)}70%{transform:scale(1.1)}100%{transform:scale(1)}}
+  .yn-success h2{font-family:'Dancing Script',cursive;font-size:4rem;color:white;text-shadow:0 0 40px var(--rose)}
+  .yn-success p{color:var(--pink);font-size:1.2rem;margin-top:10px;font-style:italic}
+
+  /* ========= PAGE 8 - COUNTDOWN ========= */
+  #p8{background:linear-gradient(160deg,#00050d 0%,#0a0010 50%,#0d0005 100%)}
+  .countdown-title{font-family:'Dancing Script',cursive;font-size:clamp(2rem,5vw,4.5rem);color:white;text-align:center;margin-bottom:10px;text-shadow:0 0 30px rgba(255,45,85,0.6)}
+  .countdown-sub{color:var(--pink);font-style:italic;text-align:center;margin-bottom:40px;font-size:1rem}
+  .countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:600px;width:90%}
+  .count-box{background:rgba(255,255,255,0.07);border-radius:20px;padding:25px 15px;text-align:center;border:1px solid rgba(255,45,85,0.3);box-shadow:0 0 30px rgba(255,45,85,0.1);position:relative;overflow:hidden}
+  .count-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,45,85,0.15),transparent 70%)}
+  .count-num{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,6vw,4rem);color:white;line-height:1;display:block;text-shadow:0 0 20px rgba(255,45,85,0.8)}
+  .count-label{font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-top:5px;display:block}
+  .together-since{text-align:center;color:rgba(255,255,255,0.5);margin-top:30px;font-size:0.9rem;font-style:italic}
+  .anniversary-note{font-family:'Dancing Script',cursive;font-size:1.5rem;color:var(--rose-light);text-align:center;margin-top:15px}
+  .stars-bg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+  .star{position:absolute;background:white;border-radius:50%;animation:twinkle 2s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+
+  /* ========= PAGE 9 - BIG LETTER ========= */
+  #p9{background:radial-gradient(ellipse at center, #1a0010 0%, #0d0008 100%)}
+  .letter-wrapper{perspective:1000px;width:90%;max-width:700px}
+  .letter-envelope{width:100%;background:linear-gradient(135deg,#8b0038,#5c0025);border-radius:15px;position:relative;overflow:hidden;box-shadow:0 20px 80px rgba(255,45,85,0.4),0 0 0 1px rgba(255,100,140,0.3);cursor:pointer;transition:all .5s}
+  .letter-envelope.open{height:auto}
+  .env-flap{position:absolute;top:0;left:0;width:100%;height:50%;clip-path:polygon(0 0, 50% 60%, 100% 0);background:linear-gradient(135deg,#a00045,#6b002d);z-index:5;transform-origin:top;transition:transform 1s cubic-bezier(0.34,1.56,0.64,1)}
+  .letter-envelope.open .env-flap{transform:rotateX(180deg)}
+  .env-body{padding:40px 30px 30px;position:relative;z-index:1}
+  .env-heart{font-size:4rem;text-align:center;display:block;animation:heartbeat 1.5s infinite}
+  .env-text{font-family:'Dancing Script',cursive;font-size:1.3rem;color:rgba(255,200,200,0.8);text-align:center;margin-top:10px}
+  .letter-paper{background:linear-gradient(180deg,var(--cream) 0%,#fff5e0 100%);border-radius:10px;padding:40px;position:relative;overflow:hidden;max-height:0;transition:max-height 1.5s ease,opacity 1s ease;opacity:0}
+  .letter-paper.revealed{max-height:2000px;opacity:1}
+  .letter-paper::before{content:'';position:absolute;left:60px;top:0;bottom:0;width:2px;background:rgba(255,100,150,0.3)}
+  .letter-lines{position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(transparent,transparent 34px,rgba(100,150,255,0.15) 34px,rgba(100,150,255,0.15) 36px);pointer-events:none;border-radius:10px}
+  .letter-date{font-family:'Quicksand',sans-serif;font-size:0.85rem;color:rgba(255,45,85,0.6);text-align:right;margin-bottom:20px;letter-spacing:1px}
+  .letter-greeting{font-family:'Dancing Script',cursive;font-size:2.2rem;color:var(--rose-dark);margin-bottom:20px;animation:writeIn 1s ease}
+  .letter-body{font-family:'Playfair Display',serif;font-size:clamp(0.95rem,2vw,1.05rem);color:#3d1020;line-height:1.9;margin-bottom:20px}
+  .letter-para{margin-bottom:15px;animation:fadeInUp .8s ease both}
+  .letter-sign{font-family:'Dancing Script',cursive;font-size:2.5rem;color:var(--rose-dark);text-align:right;margin-top:10px;animation:fadeInUp .8s 1s ease both}
+  .letter-ps{font-family:'Playfair Display',serif;font-style:italic;font-size:0.9rem;color:rgba(100,30,60,0.7);margin-top:15px;border-top:1px dashed rgba(255,45,85,0.3);padding-top:15px;animation:fadeInUp .8s 1.2s ease both}
+  .letter-open-hint{font-family:'Dancing Script',cursive;font-size:1.8rem;color:rgba(255,200,200,0.9);text-align:center;margin-top:15px;animation:pulse 2s infinite}
+  @keyframes writeIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+  .firework{position:absolute;pointer-events:none;animation:firework-burst .8s ease forwards}
+  @keyframes firework-burst{0%{transform:scale(0);opacity:1}100%{transform:scale(4);opacity:0}}
+
+  /* GLOBAL FLOATING PARTICLES */
+  .particles-global{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+  .particle{position:absolute;pointer-events:none;animation:particleFloat var(--dur) ease-in infinite;animation-delay:var(--delay);font-size:var(--size);opacity:0}
+  @keyframes particleFloat{0%{opacity:0;transform:translateY(105vh) rotate(0)}10%{opacity:.6}90%{opacity:.2}100%{opacity:0;transform:translateY(-10vh) rotate(360deg)}}
+
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+  .page-transition{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--rose);z-index:1000;pointer-events:none;transform:scaleY(0);transform-origin:bottom}
+  .page-transition.in{animation:slideIn .4s ease forwards}
+  .page-transition.out{animation:slideOut .4s ease forwards}
+  @keyframes slideIn{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+  @keyframes slideOut{from{transform:scaleY(1);transform-origin:top}to{transform:scaleY(0);transform-origin:top}}
+
+  /* RESPONSIVE */
+  @media(max-width:480px){
+    .memories-grid{grid-template-columns:repeat(2,1fr)}
+    .countdown-grid{grid-template-columns:repeat(2,1fr)}
+    .quiz-options{grid-template-columns:1fr}
+    .yn-btns{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- Global particles -->
+<div class="particles-global" id="globalParticles"></div>
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition"></div>
+
+<!-- PAGE INDICATORS -->
+<div class="page-indicator" id="pageIndicator"></div>
+
+<!-- ===== PAGE 1: WELCOME ===== -->
+<div class="page active" id="p1">
+  <div class="p1-hearts" id="floatingHearts"></div>
+  <div class="p1-title">Happy Valentine's<br>Day, My Love 💕</div>
+  <div class="p1-sub">A little something I made just for you...</div>
+  <div class="big-heart-btn" onclick="goNext()">
+    <span>💝</span>
+  </div>
+  <div class="p1-hint">tap the heart to begin</div>
+  <button class="page-btn" onclick="goNext()">Open Your Gift →</button>
+</div>
+
+
+
+<!-- ===== PAGE 2: REASONS I LOVE YOU ===== -->
+<div class="page" id="p2">
+  <div class="p3-title">Why I Love You 💌</div>
+  <div class="reasons-container" id="reasonsContainer"></div>
+  <button class="page-btn" id="p2next" onclick="tryNext(2)">Next →</button>
+</div>
+
+<!-- ===== PAGE 3: QUIZ ===== -->
+<div class="page" id="p3">
+  <div class="quiz-box">
+    <div class="quiz-title">💕 Love Quiz</div>
+    <div class="quiz-sub">How well do you know us?</div>
+    <div class="quiz-progress" id="quizProgress">Question 1 of 5</div>
+    <div class="quiz-question" id="quizQuestion">Loading...</div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-score" id="quizScore" style="display:none"></div>
+  </div>
+  <button class="page-btn" id="p3next" onclick="tryNext(3)">Next →</button>
+</div>
+
+<!-- ===== PAGE 4: BALLOON POP ===== -->
+<div class="page" id="p4">
+  <div class="prank-title">🎈 Pop the Balloons! 🎈</div>
+  <div class="prank-sub">Pop all the balloons to reveal a surprise...</div>
+  <div class="balloon-area" id="balloonArea">
+    <div class="pop-counter" id="popCounter">💥 0 popped</div>
+  </div>
+  <div class="prank-reveal" id="prankReveal">
+    <h2>🎉 GOTCHA!</h2>
+    <p style="font-size:1.3rem;margin-bottom:5px">You've been pranked! 😂</p>
+    <p>But seriously... you're the most beautiful person in my world and I'd pop a million balloons just to see you smile!</p>
+    <button class="prank-close" onclick="closePrank()">Hehe okay 💕</button>
+  </div>
+  <button class="page-btn" id="p4next" onclick="tryNext(4)">Next →</button>
+</div>
+
+<!-- ===== PAGE 5: LOVE METER ===== -->
+<div class="page" id="p5">
+  <div class="meter-title">💘 Love Meter</div>
+  <div class="meter-box">
+    <div class="meter-inputs">
+      <input class="meter-input" id="meter1" value="Sun" readonly style="cursor:default;opacity:0.8;" />
+      <input class="meter-input" id="meter2" value="Israt" readonly style="cursor:default;opacity:0.8;" />
+    </div>
+    <button class="meter-calc-btn" onclick="calcLove()">Calculate Our Love 💞</button>
+    <div class="meter-result" id="meterResult">
+      <div class="meter-percent" id="meterPercent">0%</div>
+      <div class="meter-bar-wrap"><div class="meter-bar" id="meterBar"></div></div>
+      <div class="meter-msg" id="meterMsg"></div>
+    </div>
+  </div>
+  <button class="page-btn" id="p5next" onclick="tryNext(5)">Next →</button>
+</div>
+
+<!-- ===== PAGE 6: PROMISES ===== -->
+<div class="page" id="p6">
+  <div class="promise-title">My Promises to You 🤞</div>
+  <div class="promises-list" id="promisesList"></div>
+  <div class="promise-sign" id="promiseSign" style="display:none">— Sealed with a kiss 💋</div>
+  <button class="page-btn" id="p6next" onclick="tryNext(6)">Next →</button>
+</div>
+
+<!-- ===== PAGE 7: YES/NO PRANK ===== -->
+<div class="page" id="p7">
+  <div id="ynMain">
+    <span class="yn-heart-big">💕</span>
+    <div class="yn-question">Will you be my Valentine forever and ever? 🥺</div>
+    <div class="yn-sub">Choose wisely... (there is only one right answer)</div>
+    <div class="yn-btns">
+      <button class="yn-yes" onclick="ynYes()">💖 YES!</button>
+      <button class="yn-no" id="ynNo" onmouseover="moveNo()" ontouchstart="moveNo()">No...</button>
+    </div>
+  </div>
+  <div class="yn-success" id="ynSuccess">
+    <h2>🎊 YAY! 🎊</h2>
+    <p>I knew you'd say yes! You've made me the happiest person alive!</p>
+    <div style="font-size:3rem;margin-top:15px">💕💖💕</div>
+  </div>
+  <button class="page-btn" id="p7next" onclick="tryNext(7)">Next →</button>
+</div>
+
+<!-- ===== PAGE 8: COUNTDOWN ===== -->
+<div class="page" id="p8">
+  <div class="stars-bg" id="starsBg"></div>
+  <div class="countdown-title">Our Time Together ⏰</div>
+  <div class="countdown-sub">Every second with you is a gift</div>
+  <div class="countdown-grid">
+    <div class="count-box"><span class="count-num" id="cDays">0</span><span class="count-label">Days</span></div>
+    <div class="count-box"><span class="count-num" id="cHours">0</span><span class="count-label">Hours</span></div>
+    <div class="count-box"><span class="count-num" id="cMins">0</span><span class="count-label">Minutes</span></div>
+    <div class="count-box"><span class="count-num" id="cSecs">0</span><span class="count-label">Seconds</span></div>
+  </div>
+  <div class="together-since">Since the day you walked into my life 💕</div>
+  <div class="anniversary-note">Every moment has been worth it</div>
+  <button class="page-btn" onclick="goNext()">The Big Finale →</button>
+</div>
+
+<!-- ===== PAGE 9: BIG LOVE LETTER ===== -->
+<div class="page" id="p9">
+  <div class="letter-wrapper">
+    <div class="letter-envelope" id="letterEnv" onclick="openLetter()">
+      <div class="env-flap" id="envFlap"></div>
+      <div class="env-body">
+        <span class="env-heart">💌</span>
+        <div class="env-text">A letter from my heart...</div>
+        <div class="letter-open-hint">Tap to open 💕</div>
+      </div>
+    </div>
+    <div class="letter-paper" id="letterPaper">
+      <div class="letter-lines"></div>
+      <div class="letter-date" id="letterDate"></div>
+      <div class="letter-greeting">My Dearest Love,</div>
+      <div class="letter-body">
+        <div class="letter-para">Every day I wake up grateful that you exist in my world. You are not just my Valentine — you are my best friend, my safe place, my favorite adventure, and the reason I smile for no reason at all.</div>
+        <div class="letter-para">I love the way you laugh, the way you think, the way you care about everything and everyone around you. I love how you make ordinary moments feel magical just by being there.</div>
+        <div class="letter-para">Being with you has taught me what real love looks like — patient, kind, warm, and wonderfully imperfect in the most beautiful ways. You make me want to be a better person every single day.</div>
+        <div class="letter-para">Today and every day, I choose you. A thousand times over, in a thousand different lifetimes, I would always find my way back to you.</div>
+        <div class="letter-para" style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--rose-dark)">Thank you for being mine. Thank you for letting me be yours. Happy Valentine's Day, my love. 💕</div>
+      </div>
+      <div class="letter-sign">Forever yours, 💋</div>
+      <div class="letter-ps">P.S. — Yes, I made this entire thing just for you. Every page, every word. Because you deserve the whole world, and this is my tiny version of it. 🌍❤️</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CORE NAVIGATION + COMPLETION GATES
+// ============================================================
+let currentPage = 1;
+const totalPages = 9;
+let transitioning = false;
+
+// Track which pages are completed
+const completed = {1:true, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:true, 9:true};
+
+// Shake animation for locked button
+function shakeLocked(pageNum){
+  const btn = document.getElementById('p'+pageNum+'next');
+  if(!btn) return;
+  btn.style.animation='shake 0.5s ease';
+  btn.style.color='rgba(255,100,100,0.6)';
+  setTimeout(()=>{btn.style.animation='';btn.style.color='';},500);
+  showMiniToast('Complete this page first! 💕');
+}
+
+function tryNext(pageNum){
+  if(completed[pageNum]){
+    goNext();
+  } else {
+    shakeLocked(pageNum);
+  }
+}
+
+function lockBtn(pageNum){
+  const btn = document.getElementById('p'+pageNum+'next');
+  if(btn) btn.classList.add('locked');
+}
+
+function unlockBtn(pageNum){
+  const btn = document.getElementById('p'+pageNum+'next');
+  if(btn){ btn.classList.remove('locked'); btn.textContent='Next →'; }
+}
+
+function markComplete(pageNum){
+  completed[pageNum]=true;
+  unlockBtn(pageNum);
+}
+
+function buildIndicator(){
+  const ind = document.getElementById('pageIndicator');
+  ind.innerHTML = '';
+  for(let i=1;i<=totalPages;i++){
+    const d = document.createElement('div');
+    d.className = 'dot'+(i===1?' active':'');
+    d.id = 'dot'+i;
+    ind.appendChild(d);
+  }
+}
+
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+  document.querySelectorAll('.dot').forEach(d=>d.classList.remove('active'));
+  const dotEl = document.getElementById('dot'+n);
+  if(dotEl) dotEl.classList.add('active');
+  onPageEnter(n);
+}
+
+function goNext(){
+  if(transitioning||currentPage>=totalPages) return;
+  transitioning = true;
+  const t = document.getElementById('pageTransition');
+  t.className = 'page-transition in';
+  setTimeout(()=>{
+    currentPage++;
+    showPage(currentPage);
+    t.className = 'page-transition out';
+    setTimeout(()=>{t.className='page-transition';transitioning=false},400);
+  },400);
+}
+
+function onPageEnter(n){
+  if(n===1) initPage1();
+  if(n===2) initReasons();
+  if(n===3) initQuiz();
+  if(n===4) initBalloons();
+  if(n===6) initPromises();
+  if(n===7) initYesNo();
+  if(n===8) initCountdown();
+  if(n===9) initLetter();
+  // Apply lock state on enter
+  [2,3,4,5,6,7].forEach(pg=>{
+    if(!completed[pg]) lockBtn(pg);
+    else unlockBtn(pg);
+  });
+}
+
+// ============================================================
+// PAGE 1 - FLOATING HEARTS
+// ============================================================
+function initPage1(){
+  const area = document.getElementById('floatingHearts');
+  area.innerHTML = '';
+  const hearts = ['❤️','💕','💖','💗','💝','🌹','💞','✨'];
+  for(let i=0;i<18;i++){
+    const h = document.createElement('div');
+    h.className = 'float-heart';
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left = Math.random()*100+'%';
+    h.style.animationDelay = Math.random()*6+'s';
+    h.style.animationDuration = 4+Math.random()*4+'s';
+    h.style.fontSize = 1+Math.random()*2+'rem';
+    area.appendChild(h);
+  }
+}
+
+// ============================================================
+// GLOBAL PARTICLES
+// ============================================================
+function initGlobalParticles(){
+  const c = document.getElementById('globalParticles');
+  const emojis=['✨','💫','⭐','🌟','💕'];
+  for(let i=0;i<25;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.setProperty('--dur', 8+Math.random()*10+'s');
+    p.style.setProperty('--delay', Math.random()*10+'s');
+    p.style.setProperty('--size', 0.6+Math.random()*0.8+'rem');
+    p.style.left = Math.random()*100+'%';
+    c.appendChild(p);
+  }
+}
+
+
+
+
+function showMiniToast(msg){
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(255,45,85,0.9);color:white;padding:12px 25px;border-radius:30px;font-family:Dancing Script,cursive;font-size:1.2rem;z-index:500;animation:fadeInUp .4s ease;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center';
+  document.body.appendChild(t);
+  setTimeout(()=>t.style.opacity='0',1800);
+  setTimeout(()=>t.remove(),2200);
+}
+
+// ============================================================
+// PAGE 3 - REASONS
+// ============================================================
+const reasons = [
+  "Your laugh — it's literally the best sound in the whole world",
+  "The way you make me feel safe just by being near me",
+  "How you care so deeply about the people you love",
+  "Your beautiful mind and the way you see the world",
+  "The random little things you do that make me smile every time",
+  "How you can make a boring day into an adventure",
+  "Your kindness — it's endless and genuine and rare",
+  "The way you look at me like I'm something worth looking at",
+  "How you remember the small things I mention in passing",
+  "Your strength — you're so much braver than you know",
+  "The warmth you bring into every room you walk into",
+  "How you're my best friend and my love at the same time"
+];
+
+function initReasons(){
+  const c = document.getElementById('reasonsContainer');
+  c.innerHTML = '';
+  reasons.forEach((r,i)=>{
+    const card = document.createElement('div');
+    card.className = 'reason-card';
+    card.style.animationDelay = i*0.08+'s';
+    card.innerHTML = `<span class="reason-num">${i+1}</span><span class="reason-text">${r}</span>`;
+    c.appendChild(card);
+  });
+  // Unlock after reading for 4 seconds
+  setTimeout(()=>markComplete(2), 4000);
+}
+
+// ============================================================
+// PAGE 4 - QUIZ
+// ============================================================
+const quizData = [
+  {q:"What's the most important thing in a relationship?",opts:["True and Honesty","Looking perfect","Being right always","Avoiding disagreements"],ans:0},
+  {q:"What does love feel like?",opts:["Butterflies & warmth","Stress and worry","Always being happy","Being in control"],ans:0},
+  {q:"The best date is...?",opts:["Anywhere fancy","Anywhere together 💕","A crowded party","Staying silent"],ans:1},
+  {q:"What makes someone truly beautiful?",opts:["Perfect appearance","Their kind heart & soul","Their social media","Their popularity"],ans:1},
+  {q:"What's the secret to a happy relationship?",opts:["Never arguing","Being right 100%","Growing together & laughing","Keeping score"],ans:2}
+];
+
+let qIdx=0, qScore=0, qAnswered=false;
+
+function initQuiz(){
+  qIdx=0; qScore=0; qAnswered=false;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  if(qIdx>=quizData.length){
+    document.getElementById('quizQuestion').style.display='none';
+    document.getElementById('quizOptions').style.display='none';
+    document.getElementById('quizProgress').style.display='none';
+    const scoreEl = document.getElementById('quizScore');
+    scoreEl.style.display='block';
+    let msg = qScore===5?'💯 Perfect! You know us so well! 💕':
+              qScore>=3?'💖 Great job! You really know our love!':
+              '😂 Hehe, let\'s learn more together!';
+    scoreEl.innerHTML = `You got <span style="color:var(--rose)">${qScore}/5</span> 💕<br><span style="font-size:1.1rem;color:var(--pink)">${msg}</span>`;
+    markComplete(3);
+    return;
+  }
+  const q = quizData[qIdx];
+  document.getElementById('quizProgress').textContent = `Question ${qIdx+1} of ${quizData.length}`;
+  document.getElementById('quizQuestion').textContent = q.q;
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = '';
+  qAnswered=false;
+  q.opts.forEach((o,i)=>{
+    const btn = document.createElement('button');
+    btn.className='quiz-opt';
+    btn.textContent=o;
+    btn.onclick=()=>answerQ(i,btn);
+    opts.appendChild(btn);
+  });
+}
+
+function answerQ(i, btn){
+  if(qAnswered) return;
+  qAnswered=true;
+  const q = quizData[qIdx];
+  document.querySelectorAll('.quiz-opt').forEach((b,idx)=>{
+    if(idx===q.ans) b.classList.add('correct');
+    else b.classList.add('wrong');
+  });
+  if(i===q.ans) qScore++;
+  setTimeout(()=>{qIdx++;renderQuestion();},1200);
+}
+
+// ============================================================
+// PAGE 4 - BALLOON POP
+// ============================================================
+let balloonCount=0, poppedCount=0;
+const balloonColors=[
+  ['#ff6b8a','#ff2d55'],['#ffb347','#f4c842'],['#a78bfa','#7c3aed'],
+  ['#6ee7b7','#10b981'],['#93c5fd','#3b82f6'],['#fda4af','#e11d48']
+];
+
+function initBalloons(){
+  const area = document.getElementById('balloonArea');
+  // Clear old balloons
+  area.querySelectorAll('.balloon,.confetti-piece').forEach(el=>el.remove());
+  poppedCount=0; balloonCount=0;
+  document.getElementById('popCounter').textContent='💥 0 popped';
+  document.getElementById('prankReveal').classList.remove('show');
+
+  const count=12;
+  balloonCount=count;
+  for(let i=0;i<count;i++){
+    setTimeout(()=>createBalloon(area),i*180);
+  }
+}
+
+function createBalloon(area){
+  const b = document.createElement('div');
+  b.className='balloon';
+  const colors = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+  const emojis=['❤️','💕','😍','🌹','💋','✨','💖'];
+  b.innerHTML=`
+    <div class="balloon-body" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})">${emojis[Math.floor(Math.random()*emojis.length)]}</div>
+    <div class="balloon-string"></div>
+  `;
+  b.style.left = 5+Math.random()*85+'%';
+  b.style.bottom = 10+Math.random()*50+'%';
+  b.style.animationDuration = 3+Math.random()*3+'s';
+  b.style.animationDelay = Math.random()*2+'s';
+  b.onclick = ()=>popBalloon(b, area);
+  area.appendChild(b);
+}
+
+function popBalloon(b, area){
+  if(b.classList.contains('popped')) return;
+  b.classList.add('popped');
+  // Confetti
+  const rect = b.getBoundingClientRect();
+  const aRect = area.getBoundingClientRect();
+  for(let i=0;i<10;i++){
+    const c=document.createElement('div');
+    c.className='confetti-piece';
+    const cols=['#ff2d55','#f4c842','#7c3aed','#10b981','#3b82f6','#e11d48'];
+    c.style.background=cols[Math.floor(Math.random()*cols.length)];
+    c.style.left=(rect.left-aRect.left+35)+'px';
+    c.style.top=(rect.top-aRect.top+40)+'px';
+    c.style.setProperty('--cx',(Math.random()*120-60)+'px');
+    c.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    area.appendChild(c);
+    setTimeout(()=>c.remove(),1600);
+  }
+  poppedCount++;
+  document.getElementById('popCounter').textContent=`💥 ${poppedCount} popped`;
+  setTimeout(()=>b.remove(),350);
+  if(poppedCount>=balloonCount){
+    setTimeout(()=>document.getElementById('prankReveal').classList.add('show'),400);
+  }
+}
+
+function closePrank(){
+  document.getElementById('prankReveal').classList.remove('show');
+  markComplete(4);
+}
+
+// ============================================================
+// PAGE 5 - LOVE METER
+// ============================================================
+const loveMessages=[
+  "You two are literally made for each other! 💕",
+  "A love story for the ages! 💖",
+  "The universe chose you two! ✨",
+  "Pure, perfect, wonderful love! 🌹",
+  "Soulmates through and through! 💞",
+  "Absolutely irresistible together! 💋"
+];
+
+function calcLove(){
+  const n1='Sun';
+  const n2='Israt';
+  // Always 99% because it's TRUE 💕
+  let pct = 99;
+  const result=document.getElementById('meterResult');
+  const percentEl=document.getElementById('meterPercent');
+  const bar=document.getElementById('meterBar');
+  const msg=document.getElementById('meterMsg');
+  result.style.display='block';
+  percentEl.textContent='0%';
+  bar.style.width='0%';
+  let count=0;
+  const interval=setInterval(()=>{
+    count+=2;
+    if(count>=pct){count=pct;clearInterval(interval);markComplete(5);}
+    percentEl.textContent=count+'%';
+    bar.style.width=count+'%';
+  },30);
+  msg.textContent=loveMessages[Math.floor(Math.random()*loveMessages.length)];
+}
+
+// ============================================================
+// PAGE 6 - PROMISES
+// ============================================================
+const promises = [
+  {emoji:"🤗",text:"I promise to always be your safe place — no judgment, just love"},
+  {emoji:"👂",text:"I promise to listen, truly listen, every time you need to talk"},
+  {emoji:"😂",text:"I promise to keep making you laugh, even on the hardest days"},
+  {emoji:"🤝",text:"I promise to be by your side through every high and every low"},
+  {emoji:"🌱",text:"I promise to keep growing and learning — for you, with you, always"},
+  {emoji:"💌",text:"I promise to never stop showing you how much you mean to me"},
+];
+let checkedPromises=0;
+
+function initPromises(){
+  const list=document.getElementById('promisesList');
+  list.innerHTML='';
+  checkedPromises=0;
+  document.getElementById('promiseSign').style.display='none';
+  promises.forEach((p,i)=>{
+    const item=document.createElement('div');
+    item.className='promise-item';
+    item.style.animationDelay=i*0.1+'s';
+    item.innerHTML=`<span class="promise-check">${p.emoji}</span><span class="promise-text">${p.text}</span>`;
+    item.onclick=()=>{
+      if(!item.classList.contains('checked')){
+        item.classList.add('checked');
+        item.style.borderColor='var(--rose)';
+        item.style.background='rgba(255,45,85,0.2)';
+        item.querySelector('.promise-check').textContent='✅';
+        checkedPromises++;
+        if(checkedPromises>=promises.length){
+          document.getElementById('promiseSign').style.display='block';
+          markComplete(6);
+        }
+      }
+    };
+    list.appendChild(item);
+  });
+}
+
+// ============================================================
+// PAGE 7 - YES/NO
+// ============================================================
+let noBtnMoves=0;
+function initYesNo(){
+  document.getElementById('ynMain').style.display='block';
+  document.getElementById('ynSuccess').style.display='none';
+  const no=document.getElementById('ynNo');
+  if(no){no.style.display='block';no.style.opacity='1';}
+  noBtnMoves=0;
+}
+
+function moveNo(){
+  noBtnMoves++;
+  const no=document.getElementById('ynNo');
+  if(!no) return;
+  const vw=window.innerWidth, vh=window.innerHeight;
+  const x=Math.random()*vw-50, y=Math.random()*vh-50;
+  no.style.left=Math.max(0,Math.min(vw-100,x))+'px';
+  no.style.top=Math.max(0,Math.min(vh-60,y))+'px';
+  no.style.fontSize=Math.max(0.6,1.5-noBtnMoves*0.1)+'rem';
+  if(noBtnMoves>8) no.style.opacity='0';
+  if(noBtnMoves>12) no.remove();
+}
+
+function ynYes(){
+  document.getElementById('ynMain').style.display='none';
+  const suc=document.getElementById('ynSuccess');
+  suc.style.display='block';
+  suc.style.animation='none';
+  void suc.offsetWidth;
+  suc.style.animation='bounceIn .6s ease';
+  markComplete(7);
+  // Fireworks
+  for(let i=0;i<12;i++){
+    setTimeout(()=>createFirework(),i*150);
+  }
+}
+
+function createFirework(){
+  const fw=document.createElement('div');
+  fw.className='firework';
+  fw.textContent=['💥','✨','🎉','💕','⭐'][Math.floor(Math.random()*5)];
+  fw.style.cssText=`position:fixed;font-size:2rem;left:${Math.random()*100}vw;top:${Math.random()*100}vh;z-index:500;pointer-events:none;animation:firework-burst .8s ease forwards;animation-delay:${Math.random()*0.5}s`;
+  document.body.appendChild(fw);
+  setTimeout(()=>fw.remove(),1400);
+}
+
+// ============================================================
+// PAGE 8 - COUNTDOWN
+// ============================================================
+let countInterval;
+function initCountdown(){
+  // Create stars
+  const sb=document.getElementById('starsBg');
+  sb.innerHTML='';
+  for(let i=0;i<60;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;animation-delay:${Math.random()*3}s;animation-duration:${1+Math.random()*2}s`;
+    sb.appendChild(s);
+  }
+  // Set start date - Sep 1, 2025
+  const start=new Date('2025-09-01T00:00:00');
+  if(countInterval) clearInterval(countInterval);
+  function updateCount(){
+    const now=new Date();
+    const diff=now-start;
+    const days=Math.floor(diff/(1000*60*60*24));
+    const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const mins=Math.floor((diff%(1000*60*60))/(1000*60));
+    const secs=Math.floor((diff%(1000*60))/1000);
+    document.getElementById('cDays').textContent=days.toLocaleString();
+    document.getElementById('cHours').textContent=hours;
+    document.getElementById('cMins').textContent=mins;
+    document.getElementById('cSecs').textContent=secs;
+  }
+  updateCount();
+  countInterval=setInterval(updateCount,1000);
+}
+
+// ============================================================
+// PAGE 9 - LOVE LETTER
+// ============================================================
+let letterOpened=false;
+function initLetter(){
+  letterOpened=false;
+  document.getElementById('letterEnv').classList.remove('open');
+  document.getElementById('letterPaper').classList.remove('revealed');
+  const d=new Date();
+  document.getElementById('letterDate').textContent=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+
+function openLetter(){
+  if(letterOpened) return;
+  letterOpened=true;
+  const env=document.getElementById('letterEnv');
+  const paper=document.getElementById('letterPaper');
+  env.classList.add('open');
+  env.querySelector('.env-heart').style.display='none';
+  env.querySelector('.env-text').style.display='none';
+  env.querySelector('.letter-open-hint').style.display='none';
+  setTimeout(()=>{
+    paper.classList.add('revealed');
+    // Fireworks finale
+    for(let i=0;i<20;i++) setTimeout(()=>createFirework(),i*100);
+  },600);
+}
+
+// ============================================================
+// CONFETTI HELPER
+// ============================================================
+function createConfettiAt(x,y){
+  const cols=['#ff2d55','#f4c842','#a78bfa','#6ee7b7','#fda4af'];
+  for(let i=0;i<12;i++){
+    const c=document.createElement('div');
+    c.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:8px;height:8px;background:${cols[i%cols.length]};border-radius:${Math.random()>0.5?'50%':'2px'};pointer-events:none;z-index:999;animation:confettiFall 1.2s ease forwards`;
+    c.style.setProperty('--cx',(Math.random()*120-60)+'px');
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1300);
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildIndicator();
+initGlobalParticles();
+showPage(1);
+</script>
+</body>
+</html>
